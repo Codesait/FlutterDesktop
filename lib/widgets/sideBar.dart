@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projects/utils/navigator.dart';
+import 'package:projects/widgets/side_menu_items/active_buttons.dart';
+import 'package:projects/widgets/side_menu_items/inactive_buttons.dart';
 
 class SideBar extends StatefulWidget {
   const SideBar({Key? key}) : super(key: key);
@@ -8,6 +11,11 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
+
+  Nav nav = Nav();
+  int currentIndex = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,7 +86,65 @@ class _SideBarState extends State<SideBar> {
           Expanded(
             flex: 8,
               child: Container(
-                color: Colors.white70,
+                color: Colors.white,
+                child: Column(
+                  children: <Widget>[
+
+                    // menu side bar items
+                    Expanded(
+                      flex: 8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                                padding: const EdgeInsets.only(left: 25),
+                                margin: const EdgeInsets.only(top: 15,bottom: 10),
+                                child: Text(
+                                  'MENU',
+                                  style: TextStyle(fontSize: 10,color: Colors.grey,fontWeight: FontWeight.w600),
+
+                                )),
+
+                            // menu side bar items
+                            for(var i = 0; i < nav.navMenuItems.length; i++ )
+                              if(nav.navMenuItems[i].index == currentIndex)
+                                ActiveNavButton(nav.navMenuItems[i])
+                              else
+                                InactiveNavButton(nav.navMenuItems[i])
+
+
+                          ],
+                        )
+                    ),
+
+                    // profile side bar items
+                    Expanded(
+                      flex: 5,
+                        child:  Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                                padding: const EdgeInsets.only(left: 25),
+                                margin: const EdgeInsets.only(top: 15,bottom: 10),
+                                child: Text(
+                                  'YOUR ACCOUNT',
+                                  style: TextStyle(fontSize: 10,color: Colors.grey,fontWeight: FontWeight.w600),
+
+                                )),
+
+                            // menu side bar items
+                            for(var i = 0; i < nav.navProfileItems.length; i++ )
+                              if(nav.navProfileItems[i].index == currentIndex)
+                                ActiveNavButton(nav.navProfileItems[i])
+                              else
+                                InactiveNavButton(nav.navProfileItems[i])
+
+
+                          ],
+                        )
+                    ),
+                  ],
+                ),
               )
           )
         ],
@@ -86,3 +152,5 @@ class _SideBarState extends State<SideBar> {
     );
   }
 }
+
+
