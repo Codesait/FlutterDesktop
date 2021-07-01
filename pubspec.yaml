@@ -33,6 +33,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+  window_size:
+    git:
+      url: git://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
+
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
